@@ -1,5 +1,15 @@
+<<<<<<< HEAD
 /.DS_Store
 
 /.idea/
 
 /javascripts/.DS_Store
+=======
+/node_modules/
+
+.idea
+
+.DS_Store
+
+/.tmp/
+>>>>>>> refs/heads/master
