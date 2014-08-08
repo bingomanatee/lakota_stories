@@ -92,17 +92,18 @@ define(function (require, exports, module) {
         var width = window.innerWidth/(2 * max);
         for (var i = 0; i < max; ++i){
             (function(n){
+                var height = 10 + 30 * Math.random();
                 var hill = new Surface({
-                    size: [width, 40],
-                    classes: self.mtnClass,
-                    content: '<b style="color: black">hill' + n + ': ' + a++ + '</b>'
+                    size: [width, height],
+                    classes: self.mtnClass.concat(['mesa']),
+            //        content: '<b style="color: black">hill' + n + ': ' + a++ + '</b>'
                 });
 
                 self.add(new Modifier({
                     origin: [0, 0.5],
                    transform: function(){
                        var x = n * window.innerWidth /( max);
-                       return Transform.translate((x + self.xOffset()) % (window.innerWidth + width * 2) - width * 2, -20, 0);
+                       return Transform.translate((x + self.xOffset()) % (window.innerWidth + width * 2) - width * 2, -height/2, 0);
                    }
                 })).add(hill);
 

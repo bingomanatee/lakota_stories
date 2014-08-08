@@ -24,7 +24,7 @@ var INIT_MTNS = 5;
 
         for (var i = 0; i < INIT_MTNS; ++i){
             var mtn = new Mountain({z: 0});
-            this.add(new Modifier({transform: Transform.translate(0, i * 20, 0), origin: [0.5, 1]})).add(mtn);
+            this.add(new Modifier({transform: Transform.translate(0, i * 10, 0), origin: [0.5, 1]})).add(mtn);
             this.mountains.push(mtn);
         }
     }
