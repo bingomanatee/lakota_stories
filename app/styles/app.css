@@ -79,3 +79,17 @@ html {
 .blue {
     background-color: rgb(37, 74, 93);
 }
+
+.sand {
+    background-image: url(../content/images/sand.png);
+    width: 600px;
+    height: 600px;
+    background-repeat: repeat
+}
+
+.sand-2 {
+    background-image: url(../content/images/sand-2.png);
+    width: 600px;
+    height: 600px;
+    background-repeat: repeat
+}

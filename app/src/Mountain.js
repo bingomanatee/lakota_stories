@@ -44,12 +44,14 @@ define(function (require, exports, module) {
     var MIN_HEIGHT = window.innerHeight / 20, MAX_HEIGHT = window.innerHeight / 8;
     var MAX_DEPTH = 50;
 
+    var sands = ['sand' ,'sand-2'];
+
     function Mountain(options) {
 
         View.call(this, options);
 
         colors = _.shuffle(colors);
-        this.mtnClass = colors.pop();
+        this.mtnClass = [colors.pop(), _.shuffle(sands)[0]];
 
         this.addBottom();
 
@@ -62,26 +64,37 @@ define(function (require, exports, module) {
 
     Mountain.prototype.addBottom = function(){
         var s = new Surface({
-            size:[ window.innerWidth, window.innerHeight/2],
+            size:[ window.innerWidth + 1200, window.innerHeight/2],
             origin: [0.5, 1],
-            classes: [this.mtnClass]
+            classes: this.mtnClass
 
         }) ;
-        this.add(s);
+        var self= this;
+        this.add(new Modifier({
+
+            transform: function(){
+                return Transform.translate(self.xOffset() % 600 - 600, 0, 0);
+            }
+        })).add(s);
 
     };
 
     var a = 0;
     var startTime = new Date().getTime();
 
+    Mountain.prototype.xOffset = function(){
+        return (new Date().getTime() - startTime) * this.mtnSpeed;
+    };
+
     Mountain.prototype.initMtn = function () {
         var max = 2 + (Math.floor(Math.random() * 4));
         var self = this;
+        var width = window.innerWidth/(2 * max);
         for (var i = 0; i < max; ++i){
             (function(n){
                 var hill = new Surface({
-                    size: [window.innerWidth/(2 * max), 40],
-                    classes: [self.mtnClass],
+                    size: [width, 40],
+                    classes: self.mtnClass,
                     content: '<b style="color: black">hill' + n + ': ' + a++ + '</b>'
                 });
 
@@ -89,19 +102,12 @@ define(function (require, exports, module) {
                     origin: [0, 0.5],
                    transform: function(){
                        var x = n * window.innerWidth /( max);
-                       return Transform.translate((x + (new Date().getTime() - startTime) * self.mtnSpeed) % window.innerWidth * 2 - window.innerWidth/2, -20, 0);
+                       return Transform.translate((x + self.xOffset()) % (window.innerWidth + width * 2) - width * 2, -20, 0);
                    }
                 })).add(hill);
 
             }.bind(this))(i);
         }
-    };
-
-    Mountain.prototype._nextClass = function (preserve) {
-        if (preserve) {
-            return this.mtnClasses[0];
-        }
-        return this.mtnClasses.length ? [this.mtnClasses.shift(), this.mtnColor] : false;
     };
 
     module.exports = Mountain;
