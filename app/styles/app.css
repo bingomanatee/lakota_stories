@@ -67,3 +67,15 @@ html {
 .black {
     background-color: rgb(50, 29, 29);
 }
+
+.white {
+    background-color: rgb(208, 167, 179);
+}
+
+.yellow {
+    background-color: rgb(181, 155, 38);
+}
+
+.blue {
+    background-color: rgb(37, 74, 93);
+}
