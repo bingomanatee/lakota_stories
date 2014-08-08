@@ -43,6 +43,7 @@ define(function (require, exports, module) {
     var MIN_WIDTH = window.innerWidth / 10, MAX_WIDTH = window.innerWidth / 4, SIZE_UNIT = 7;
     var MIN_HEIGHT = window.innerHeight / 20, MAX_HEIGHT = window.innerHeight / 8;
     var MAX_DEPTH = 50;
+    var SLOWNESS = 50;
 
     var sands = ['sand' ,'sand-2'];
 
@@ -55,7 +56,7 @@ define(function (require, exports, module) {
 
         this.addBottom();
 
-        this.mtnSpeed = (Math.random() + 0.5)/10;
+        this.mtnSpeed = (Math.random() + 0.5)/SLOWNESS;
 
        this.initMtn();
     }
